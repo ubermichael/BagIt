@@ -1,0 +1,25 @@
+{
+    "name": "nines/bag-it",
+    "description": "BagIt library for PHP.",
+    "authors": [
+        {
+            "name": "Michael Joyce",
+            "email": "ubermichael@gmail.com"
+        }
+    ],
+    "license": "GPL 2",
+    "require": {
+        "php": ">=5.4.0",
+        "psr/log": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*",
+        "monolog/monolog": "^1.15@dev",
+        "apigen/apigen": "4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nines\\BagIt\\": "src/Nines/BagIt"
+        }
+    }    
+}
