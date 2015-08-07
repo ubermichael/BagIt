@@ -63,7 +63,12 @@ class Manifest implements BagItComponent {
         $this->isTagManifest = $isTagManifest;
     }
     
-    public function getAlgorithm() {
+    public function getAlgorithm($normalize = false) {
+        if($normalize) {
+            $lower = strtolower($this->algorithm);
+            $normalized = preg_replace('/[^a-zA-Z0-9]/', '', $lower);
+            return $normalized;
+        }
         return $this->algorithm;
     }
     
@@ -134,7 +139,7 @@ class Manifest implements BagItComponent {
     }
     
     public function write($path) {
-        $fileName = "manifest-{$this->algorithm}.txt";
+        $fileName = "manifest-" . $this->normalize($this->algorithm) . ".txt";
         if($this->isTagManifest()) {
             $fileName = 'tag' . $fileName;
         }
