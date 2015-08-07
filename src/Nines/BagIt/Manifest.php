@@ -4,19 +4,30 @@ namespace Nines\BagIt;
 
 use SplFileInfo;
 
-class Manifest {
-    
+class Manifest implements BagItComponent {
+
+    use Logging;
+
     private $data;
 
     private $algorithm;
     
     private $isTagManifest;
-    
+
+    public function filename() {
+        $filename = '';
+        if($this->isTagManifest) {
+            $filename = 'tag';
+        }
+        $filename .= "manifest-{$this->algorithm}.txt";
+        return $filename;
+    }
+
     /**
      * @param string $path
      * @throws BagItException
      */
-    public static function readManifest($path) {
+    public static function read($path) {
         $fileInfo = new SplFileInfo($path);
         
         $matches = array();
@@ -122,7 +133,7 @@ class Manifest {
         return $content;
     }
     
-    public function writeManifest($path) {
+    public function write($path) {
         $fileName = "manifest-{$this->algorithm}.txt";
         if($this->isTagManifest()) {
             $fileName = 'tag' . $fileName;

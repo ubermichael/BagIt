@@ -4,24 +4,20 @@ namespace Nines\BagIt;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Stream\Stream;
-use Psr\Log\LoggerInterface;
 
-class Fetch {
+class Fetch implements BagItComponent {
+
+    use Logging;
 
     private $data;
 
     private $certPath;
 
-    /**
-     * PSR-3 compatible logger
-     *
-     * @var LoggerInterface
-     */
-    private $logger;
+    public function filename() {
+        return 'fetch.txt';
+    }
 
-    const FILENAME = 'fetch.txt';
-
-    public static function readFetch($path) {
+    public static function read($path) {
         $content = file_get_contents($path . DIRECTORY_SEPARATOR . self::FILENAME);
         $lines = explode("\n", $content);
         $fetch = new Fetch();
@@ -35,39 +31,6 @@ class Fetch {
     public function __construct() {
         $this->data = array();
         $this->certPath = true;
-    }
-
-    /**
-     * Add a logger to the file finder. It must be a PSR-3 compatible
-     * logger, like monolog/monolog.
-     *
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger) {
-        $this->logger = $logger;
-    }
-
-    /**
-     * Get the logger. It must be a PSR-3 compatible
-     * logger, like monolog/monolog.
-     *
-     * @return LoggerInterface
-     */
-    public function getLogger() {
-        return $this->logger;
-    }
-
-    /**
-     * Log a message to the logger, if there is one.
-     *
-     * @param string $message
-     * @param string $context
-     * @param string $level
-     */
-    public function log($message, $context = array(), $level = 'info') {
-        if ($this->logger) {
-            $this->logger->log($level, $message, $context);
-        }
     }
 
     public function setCertPath($path) {
@@ -121,7 +84,7 @@ class Fetch {
         return $content;
     }
 
-    public function writeFetch($path) {
+    public function write($path) {
         $fileName = $path . DIRECTORY_SEPARATOR . self::FILENAME;
         file_put_contents($fileName, $this->serialize());
     }

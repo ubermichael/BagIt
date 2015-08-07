@@ -2,13 +2,17 @@
 
 namespace Nines\BagIt;
 
-class Metadata {
+class Metadata implements BagItComponent {
+
+    use Logging;
 
     private $data;
 
-    const FILENAME = 'bag-info.txt';
+    public function filename() {
+        return 'bag-info.txt';
+    }
 
-    public static function readMetadata($path) {
+    public static function read($path) {
         $content = file_get_contents($path . DIRECTORY_SEPARATOR . self::FILENAME);
         $cleaned = preg_replace('/\n\s+', ' ', $content);
         $lines = explode("\n", $cleaned);
@@ -80,7 +84,7 @@ class Metadata {
         return $content;
     }
 
-    public function writeMetadata($path) {
+    public function write($path) {
         $fileName = $path . DIRECTORY_SEPARATOR . self::FILENAME;
         file_put_contents($fileName, $this->serialize());
     }
