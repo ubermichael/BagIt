@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dab465862929a54d24adde8b59a7e718",
+    "hash": "5bf9e57b7d3e0e76b8dc0a3fd39b12ef",
     "packages": [
+        {
+            "name": "nines/file-find",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ubermichael/filefinder.git",
+                "reference": "9da0d68e740decc7a5c4edf415dec957f40ee50b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ubermichael/filefinder/zipball/9da0d68e740decc7a5c4edf415dec957f40ee50b",
+                "reference": "9da0d68e740decc7a5c4edf415dec957f40ee50b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/log": "dev-master"
+            },
+            "require-dev": {
+                "apigen/apigen": "4.1",
+                "monolog/monolog": "^1.15@dev",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nines\\FileFind\\": "src/Nines/FileFind"
+                }
+            },
+            "license": [
+                "GPL 2"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Joyce",
+                    "email": "ubermichael@gmail.com"
+                }
+            ],
+            "description": "Recursive file and directory finder.",
+            "support": {
+                "source": "https://github.com/ubermichael/filefinder/tree/master",
+                "issues": "https://github.com/ubermichael/filefinder/issues"
+            },
+            "time": "2015-08-06 21:30:39"
+        },
         {
             "name": "psr/log",
             "version": "dev-master",
@@ -2795,6 +2840,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "psr/log": 20,
+        "nines/file-find": 20,
         "monolog/monolog": 20
     },
     "prefer-stable": false,

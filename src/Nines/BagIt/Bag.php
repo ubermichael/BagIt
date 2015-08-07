@@ -3,7 +3,15 @@
 namespace Nines\BagIt;
 
 class Bag {
-
+    
+    private $bagItVersion;
+    
+    private $tagFileEncoding;
+    
+    private $manifests;
+    
+    private $metadata;
+    
     /**
      * Open an existing BagIt file or directory.
      * 
@@ -15,7 +23,8 @@ class Bag {
     }
     
     public function __construct() {
-        // don't do anythign yet.
+        $this->manifests = array();
+        $this->metadata = array();
     }
     
 }
