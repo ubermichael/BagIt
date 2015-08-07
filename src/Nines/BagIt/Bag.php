@@ -10,6 +10,8 @@ class Bag {
     
     private $manifests;
     
+    private $fetch;
+
     private $metadata;
     
     /**
@@ -23,8 +25,6 @@ class Bag {
     }
     
     public function __construct() {
-        $this->manifests = array();
-        $this->metadata = array();
     }
-    
+
 }
