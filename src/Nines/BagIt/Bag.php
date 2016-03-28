@@ -63,7 +63,7 @@ class Bag extends Component {
 		
 	}
 
-	public function read(SplFileInfo $data) {
+	public function read(SplFileObject $data) {
 		
 	}
 

@@ -20,7 +20,6 @@ class Declaration {
 			throw new BagException("Malformed BagIt version: {$version}");
 		}
 		$this->version = $version;
-		return $this;
 	}
 	
 	public function getVersion() {
@@ -28,8 +27,10 @@ class Declaration {
 	}
 	
 	public function setEncoding($encoding) {
+		if(!in_array($encoding, mb_list_encodings())) {
+			throw new BagException("Unsupported encoding {$encoding} in this PHP.");
+		}
 		$this->encoding = $encoding;
-		return $this;
 	}
 	
 	public function getEncoding() {
@@ -62,5 +63,6 @@ class Declaration {
 		$str = "";
 		$str .= "BagIt-Version: {$this->version}\n";
 		$str .= "Tag-File-Character-Encoding: {$this->encoding}\n";
+		return $str;
 	}
 }

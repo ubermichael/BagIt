@@ -23,9 +23,9 @@ trait BagLogger {
 		return $this->logger;
 	}
 	
-	public function log($level, $message) {
+	public function log($level, $message, array $context = array()) {
 		if($this->logger) {
-			$this->logger->log($level, $message);
+			$this->logger->log($level, $message, $context);
 		}
 	}
 }
