@@ -2,99 +2,80 @@
 
 namespace Nines\BagIt;
 
-class Bag {
-    
-    private $bagItVersion;
-    
-    private $tagFileEncoding;
-    
-    /**
-     * @var Manifest[]
-     */
-    private $manifests;
-    
-    /**
-     * @var Manifest[]
-     */
-    private $tagManifests;
+use Nines\BagIt\Adapter\BagItAdapter;
+use Nines\BagIt\Manifest\Manifest;
+use Psr\Log\LoggerInterface;
+use SplFileInfo;
 
-    /**
-     * @var Fetch
-     */
-    private $fetch;
+class Bag extends Component {
+	
+	const DEFAULT_BAGIT_VERSION = "0.98";
 
-    /**
-     * @var Metadata
-     */
-    private $metadata;
+	const DEFAULT_BAGIT_ENCODING = "UTF-8";
+	
+	/**
+	 * @var BagItAdapter
+	 */
+	private $adapter;
+	
+	/**
+	 * @var Declaration;
+	 */
+	private $declaration;
+	
+	/**
+	 * @var string
+	 */
+	private $base;
+	
+	/**
+	 * @var Manifest[]
+	 */
+	private $manifests;
+	
+	/**
+	 * @var Metadata
+	 */
+	private $metadata;
+	
+	/**
+	 * @var Fetch
+	 */
+	private $fetch;
+	
+	public function __construct() {
+		$this->declaration = new Declaration();		
+		$this->manifests = array();
+		$this->metadata = new Metadata();
+		$this->fetch = new Fetch();
+	}
 
-    private $tagFiles;
-    
-    private $dataFiles;
-    
-    /**
-     * Open an existing BagIt file or directory.
-     * 
-     * @param string $path
-     * @return Bag
-     */
-    public static function open($path) {
-        return new Bag();
-    }
-    
-    public function __construct() {
-    }
+	public static function open($path) {
+		$bag = new Bag();
+		
+	}
+	
+	public function setLogger(LoggerInterface $logger) {
+		
+	}
 
-    public function setBagItVersion($version) {
-        $this->bagItVersion = $version;
-    }
-    
-    public function getBagItVersion() {
-        return $this->bagItVersion;                
-    }
-    
-    public function setTagFileEncoding($encoding) {
-         $this->tagFileEncoding = $encoding;
-    }
-    
-    public function getTagFileEncoding() {
-        return $this->tagFileEncoding;
-    }
-    
-    public function addManifest(Manifest $manifest) {
-        $this->manifests[$manifest->getAlgorithm()] = $manifest;
-    }
-    
-    public function getManifest($algorithm) {
-        return $this->manifests[$algorithm];
-    }
-    
-    public function removeManifest($algorithm) {
-        if(array_key_exists($algorithm, $this->manifests)) {
-            unset($this->manifests[$algorithm]);
-        }
-    }
-    
-    public function getManifestAlgorithms() {
-        return array_keys($this->manifests);
-    }
-    
-    public function addTagManifest(Manifest $manifest) {
-        $this->tagManifests[$manifest->getAlgorithm()] = $manifest;
-    }
-    
-    public function getTagManifest($algorithm) {
-        return $this->tagManifests[$algorithm];
-    }
-    
-    public function removeTagManifest($algorithm) {
-        if(array_key_exists($algorithm, $this->tagManifests)) {
-            unset($this->tagManifests[$algorithm]);
-        }
-    }
-    
-    public function getTagManifestAlgorithms() {
-        return array_keys($this->tagManifests);
-    }
-    
+	public function getFilename() {
+		
+	}
+
+	public function read(SplFileInfo $data) {
+		
+	}
+
+	public function isComplete() {
+		
+	}
+	
+	public function isValid() {
+		// if( ! $this->isComplete()) { return false;}s
+	}
+	
+	public function serialize() {
+		
+	}
 }

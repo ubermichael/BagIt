@@ -9,15 +9,16 @@
     ],
     "license": "GPL 2",
     "require": {
-        "php": ">=5.4.0",
-        "psr/log": "dev-master",
+        "php": ">=5.5.0",
+        "psr/log": "^1.0",
         "nines/file-find": "dev-master",
-        "guzzlehttp/guzzle": "5.3"
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.7.*",
-        "monolog/monolog": "^1.15@dev",
-        "apigen/apigen": "4.1"
+        "phpunit/phpunit": "^4.8",
+        "monolog/monolog": "^1.18",
+        "apigen/apigen": "*",
+        "squizlabs/php_codesniffer": "^2.5"
     },
     "repositories": [
         {
