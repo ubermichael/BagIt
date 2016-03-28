@@ -154,6 +154,17 @@ class MetadataTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(1, $this->metadata->countKeys());		
 	}
 	
+	public function testReadWithEncoding() {
+		$content = "east: 東\n";
+		$encoding = 'UTF-16';
+		$utf16 = mb_convert_encoding($content, $encoding, 'UTF-8');
+		$fi = new SplFileObject('php://temp', 'r+');
+		$fi->fwrite($utf16);
+		$fi->rewind();
+		$this->metadata->read($fi, $encoding);
+		$this->assertEquals('東', $this->metadata->getData('east'));
+	}
+	
 	/**
 	 * @expectedException  \Nines\BagIt\BagException
 	 */
