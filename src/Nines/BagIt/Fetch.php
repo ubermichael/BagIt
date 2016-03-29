@@ -41,8 +41,10 @@ class Fetch extends Component {
 		$this->data = $item;
 	}
 
-	public function read(SplFileInfo $data) {
-		$fh = $data->openFile('r');
+	public function read(SplFileObject $fh = null) {
+		if($fh === null) {
+			return;
+		}
 		while($line = $fh->fgets()) {
 			list($url, $length, $filename) = split('/ /', $line, 3);
 			$this->addData($url, $length, $filename);

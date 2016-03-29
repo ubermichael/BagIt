@@ -75,9 +75,13 @@ class Metadata extends Component {
 		}
 	}
 	
-	public function read(SplFileObject $data, $encoding = 'UTF-8') {
+	public function read(SplFileObject $data = null, $encoding = 'UTF-8') {
+		if($data === null) {
+			return;
+		}
 		$content = '';
-		while($line = $data->fgets()) {
+		while( ! $data->eof()) {
+			$line = $data->fgets();
 			$content .= $line;
 		}
 		if($encoding !== 'UTF-8') {

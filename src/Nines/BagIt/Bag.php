@@ -52,7 +52,19 @@ class Bag extends Component {
 
 	public static function open($path) {
 		$bag = new Bag();
+		$bag->base = $path;
+		$bag->adapter = BagItAdapter::open($path);
 		
+		$bag->declaration = new Declaration();
+		$bag->declaration->read($bag->adapter->getDeclaration());
+		
+		$bag->metadata = new Metadata();
+		$bag->metadata->read($bag->adapter->getMetadata());
+		
+		$bag->fetch = new Fetch();
+		$bag->fetch->read($bag->adapter->getFetch());
+		
+		return $bag;
 	}
 	
 	public function setLogger(LoggerInterface $logger) {
@@ -67,6 +79,13 @@ class Bag extends Component {
 		
 	}
 
+	/**
+	 * @return SplFileInfo[]
+	 */
+	public function getContents() {
+		return $this->adapter->getContents();
+	}
+	
 	public function isComplete() {
 		
 	}

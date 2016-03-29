@@ -53,7 +53,7 @@ class Declaration {
 		
 		$encodingLine = $fh->fgets();
 		$encodingMatches = array();
-		if(! preg_match("/^Tag-File-Character-Encoding:\s*([a-zA-Z0-9]]+)", $encodingLine, $encodingMatches)) {
+		if(! preg_match("/^Tag-File-Character-Encoding:\s*([a-zA-Z0-9-]+)$/", $encodingLine, $encodingMatches)) {
 			throw new BagException("Malformed tag encoding in {$encodingLine}");
 		}
 		$this->encoding = $encodingMatches[1];
