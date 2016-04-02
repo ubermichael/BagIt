@@ -3,12 +3,12 @@
 namespace Nines\BagIt\Adapter;
 
 use Nines\BagIt\BagException;
+use Nines\BagIt\Component\BagLogger;
 use Nines\FileFind\Finder;
 use Nines\FileFind\FinderAdapter;
 use Psr\Log\LoggerAwareInterface;
 use SplFileInfo;
 use SplFileObject;
-use Nines\BagIt\BagLogger;
 
 abstract class BagItAdapter implements LoggerAwareInterface {
 	

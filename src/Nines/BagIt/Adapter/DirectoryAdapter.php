@@ -45,5 +45,4 @@ class DirectoryAdapter extends BagItAdapter {
 			'depth' => 1,
 		));
 	}
-
 }

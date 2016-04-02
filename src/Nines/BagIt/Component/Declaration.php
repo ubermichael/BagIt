@@ -1,10 +1,10 @@
 <?php
 
-namespace Nines\BagIt;
+namespace Nines\BagIt\Component;
 
 use SplFileInfo;
 
-class Declaration {
+class Declaration extends Component {
 	
 	private $version;
 	

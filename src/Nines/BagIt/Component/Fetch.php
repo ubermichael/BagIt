@@ -1,6 +1,6 @@
 <?php
 
-namespace Nines\BagIt;
+namespace Nines\BagIt\Component;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Stream\Stream;

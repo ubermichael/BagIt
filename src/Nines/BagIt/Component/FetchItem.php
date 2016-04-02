@@ -1,6 +1,6 @@
 <?php
 
-namespace Nines\BagIt;
+namespace Nines\BagIt\Component;
 
 class FetchItem {
 	

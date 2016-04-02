@@ -3,9 +3,14 @@
 namespace Nines\BagIt;
 
 use Nines\BagIt\Adapter\BagItAdapter;
+use Nines\BagIt\Component\Component;
+use Nines\BagIt\Component\Declaration;
+use Nines\BagIt\Component\Fetch;
+use Nines\BagIt\Component\Metadata;
 use Nines\BagIt\Manifest\Manifest;
 use Psr\Log\LoggerInterface;
 use SplFileInfo;
+use SplFileObject;
 
 class Bag extends Component {
 	
@@ -19,7 +24,7 @@ class Bag extends Component {
 	private $adapter;
 	
 	/**
-	 * @var Declaration;
+	 * @var Declaration
 	 */
 	private $declaration;
 	

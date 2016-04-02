@@ -1,7 +1,8 @@
 <?php
 
-namespace Nines\BagIt;
+namespace Nines\BagIt\Component;
 
+use Nines\BagIt\BagException;
 use SplFileObject;
 
 class Metadata extends Component {
@@ -80,7 +81,7 @@ class Metadata extends Component {
 			return;
 		}
 		$content = '';
-		while( ! $data->eof()) {
+		while(! $data->eof()) {
 			$line = $data->fgets();
 			$content .= $line;
 		}

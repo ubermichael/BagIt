@@ -1,6 +1,6 @@
 <?php
 
-namespace Nines\BagIt;
+namespace Nines\BagIt\Component;
 
 use SplFileObject;
 use Psr\Log\LoggerAwareInterface;

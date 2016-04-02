@@ -1,6 +1,6 @@
 <?php
 
-namespace Nines\BagIt\Manifest;
+namespace Nines\BagIt\Component\Manifest;
 
 class PayloadManifest extends Manifest {
 	
