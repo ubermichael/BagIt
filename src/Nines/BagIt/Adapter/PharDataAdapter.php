@@ -1,78 +1,63 @@
 <?php
 
+/* 
+ * The MIT License
+ *
+ * Copyright 2016 michael.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 namespace Nines\BagIt\Adapter;
 
+use Nines\BagIt\Component\Declaration;
+use Nines\BagIt\Component\Metadata;
+use PharData;
+use PharFileInfo;
 use SplFileInfo;
-use SplFileObject;
 
 class PharDataAdapter extends BagItAdapter {
 	
+	/**
+	 * Handle to the phar data archive.
+	 * 
+	 * @var PharData
+	 */
 	private $phar;
 	
 	public function __construct(SplFileInfo $base) {
-		parent::__construct($base);
-		$this->phar = new \PharData($base->getPathname());
+		parent::__construct(new PharData($base->getPathname()));
 	}
-	
-	/**
-	 * @return SplFileObject[]
-	 */
+
 	public function getPayloadFiles() {
 		
 	}
 
-	/**
-	 * @return SplFileObject
-	 */
-	public function getDeclaration() {
-		return $this->getFile($this->phar->getPathname() . '/' . 'fetch.txt', 'Cannot find the required bag declaration bagit.txt');
-	}
-
-	/**
-	 * @return null|SplFileObject
-	 */
-	public function getFetch() {
-		return $this->getFile($this->phar->getPathname() . '/fetch.txt');
-	}
-
-	/**
-	 * @return null|SplFileObject
-	 */
-	public function getMetadata() {
-		return $this->getFile($this->phar->getPathname() . '/bag-info.txt');
-	}
-
-	/**
-	 * @return SplFileObject[]
-	 */
 	public function getPayloadManifests() {
-		$callback = function(SplFileInfo $fi) {
-			return preg_match('/^manifest-[a-zA-Z0-9-]*.txt$/', $fi->getBasename());
-		};
-		return $this->finder->find($callback, array(
-			'depth' => 2,
-		));
+		
 	}
 
-
-	/**
-	 * @return SplFileObject[]
-	 */
 	public function getTagFiles() {
-		return $this->finder->find(null, array(
-			'exclude' => array('data'),
-		));
+		
 	}
 
-	/**
-	 * @return SplFileObject[]
-	 */
 	public function getTagManifests() {
-		$callback = function(SplFileInfo $fi) {
-			return preg_match('/^tagmanifest-[a-zA-Z0-9-]*.txt$/', $fi->getBasename());
-		};
-		return $this->finder->find($callback, array(
-			'depth' => 2,
-		));
+		
 	}
 }

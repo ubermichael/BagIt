@@ -14,7 +14,7 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testGetFilename() {
-		$this->assertEquals('bagit.txt', $this->decl->getFilename());
+		$this->assertEquals('bagit.txt', $this->decl->getPath());
 	}
 	
 	public function testDefaultVersion() {
