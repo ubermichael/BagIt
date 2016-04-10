@@ -139,6 +139,17 @@ class Metadata extends Component {
 	}
 	
 	/**
+	 * Remove the values associated with a metadata key, and remove the key.
+	 * 
+	 * @param string $key
+	 */
+	public function removeData($key) {
+		if(array_key_exists($key, $this->data)) {
+			unset($this->data[$key]);
+		}
+	}
+	
+	/**
 	 * Return a list of metadata keys.
 	 * 
 	 * @return string[]

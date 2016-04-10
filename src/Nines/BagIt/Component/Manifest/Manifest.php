@@ -98,7 +98,7 @@ abstract class Manifest implements LoggerAwareInterface {
 	 */
 	public function setAlgorithm($algorithm) {
 		if(!in_array($algorithm, hash_algos())) {
-			throw new BagException("Unsupported hash algorithm {$algorithm}");
+			throw new BagException("Unsupported hash algorithm '{$algorithm}'");
 		}
 		$this->algorithm = $algorithm;
 	}
@@ -273,8 +273,10 @@ abstract class Manifest implements LoggerAwareInterface {
 	 */
 	public function read(SplFileObject $data, $encoding = 'UTF-8') {
 		$matches = array();
-		preg_match('/^manifest-(?<alg>[a-zA-Z0-9-]+)\.txt$/', $data->getBasename(), $matches);
-		$this->setAlgorithm($matches['alg']);
+		if( ! preg_match('/^(?:tag)?manifest-([a-zA-Z0-9-]+)\.txt$/', $data->getBasename(), $matches)) {
+			throw new BagException("Cannot determine manifest algorithm in filename '{$data->getBasename()}'");
+		}
+		$this->setAlgorithm($matches[1]);
 		while(! $data->eof()) {
 			$line = trim($data->fgets());
 			if(! $line) {
@@ -283,7 +285,7 @@ abstract class Manifest implements LoggerAwareInterface {
 			if($encoding !== 'UTF-8') {
 				$line = mb_convert_encoding($line, 'UTF-8', $encoding);
 			}
-			list($hash, $file) = explode(' ', $line);
+			list($hash, $file) = preg_split('/\s+/', $line, 2);
 			$this->addFile($file, $hash);
 		}
 	}

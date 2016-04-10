@@ -136,6 +136,11 @@ class Bag implements LoggerAwareInterface {
 
 	public function __construct() {
 		$this->logger = new NullLogger();
+		$this->declaration = new Declaration();
+		$this->payloadManifests = array();
+		$this->metadata = new Metadata();
+		$this->fetch = new Fetch();
+		$this->tagManifests = array();
 	}
 
 	/**
@@ -459,48 +464,93 @@ class Bag implements LoggerAwareInterface {
 	// Metadata
 	/**
 	 * Check if the bag has a metadata file.
+	 * @return boolean
 	 */
-	public function hasMetadata() {}
+	public function hasMetadata() {
+		return $this->metadata->countKeys() > 0;
+	}
 	
 	/**
 	 * Add a value to a key, or create a new key if it doesn't already exist.
+	 * @param string $key Metadata key to add
+	 * @param string|array $value Value to add
 	 */
-	public function addMetadataKey() {}
+	public function addMetadataKey($key, $value) {
+		$this->metadata->addData($key, $value);
+	}
 	
 	/**
 	 * Set the value of a metadata key. Previous value(s) will be lost.
+	 * @param string $key Metadata key to add
+	 * @param string|array $value Value to add
 	 */
-	public function setMetadataKey() {}
+	public function setMetadataKey($key, $value) {
+		$this->metadata->setData($key, $value);
+	}
 	
 	/**
 	 * Get the value associated with a metadata key
+	 * 
+	 * @param string $key the key to fetch
+	 * 
+	 * @return null|string|array
 	 */
-	public function getMetadataKey() {}
+	public function getMetadataKey($key) {
+		return $this->metadata->getData($key);
+	}
 	
 	/**
-	 * Remove the values associated with $key, and remove $key.
+	 * Remove the values associated with a metadata key, and remove the key.
+	 * 
+	 * @param string $key
 	 */
-	public function hasMetadataKey() {}
+	public function removeMetadataKey($key) {
+		$this->metadata->removeData($key);
+	}
 	
 	/**
-	 * Check if the metadata includes a key.
+	 * Check if the metadata contains the given key
+	 * 
+	 * @param string $key the key to check
 	 */
-	public function countMetadataKeys() {}
+	public function hasMetadataKey($key) {
+		return $this->metadata->hasData($key);
+	}
 	
 	/**
-	 * Count the metadata keys.
+	 * Count the metadata keys
+	 * 
+	 * @return int
 	 */
-	public function countMetadataValues() {}
+	public function countMetadataKeys() {
+		return $this->metadata->countKeys();
+	}
+	
+	/**
+	 * Count the metadata values associated with a key
+	 * 
+	 * @param string key
+	 * 
+	 * @return int
+	 */
+	public function countMetadataValues($key) {
+		return $this->metadata->countValues($key);
+	}
 	
 	/**
 	 * List all the metadata keys. There will be no duplicates in the list.
+	 * @return string[]
 	 */
-	public function listMetadataKeys() {}
+	public function listMetadataKeys() {
+		return $this->metadata->listKeys();
+	}
 	
 	/**
 	 * Remove all the metadata keys and values.
 	 */
-	public function clearMetadata() {}
+	public function clearMetadata() {
+		$this->metadata->clearData();
+	}
 	
 	//  ------------------------------------- 
 	// Tag files

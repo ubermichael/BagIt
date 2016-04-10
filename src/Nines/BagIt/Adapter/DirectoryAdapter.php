@@ -48,12 +48,4 @@ class DirectoryAdapter extends BagItAdapter {
 		));
 	}
 
-	public function getTagManifests() {
-		$callback = function(SplFileInfo $fi) {
-			return preg_match('/^tagmanifest-[a-zA-Z0-9-]*.txt$/', $fi->getBasename());
-		};
-		return $this->finder->find($callback, array(
-			'depth' => 1,
-		));
-	}
 }
