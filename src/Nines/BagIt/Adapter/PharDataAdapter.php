@@ -49,15 +49,7 @@ class PharDataAdapter extends BagItAdapter {
 		
 	}
 
-	public function getPayloadManifests() {
-		
-	}
-
 	public function getTagFiles() {
-		
-	}
-
-	public function getTagManifests() {
 		
 	}
 }
