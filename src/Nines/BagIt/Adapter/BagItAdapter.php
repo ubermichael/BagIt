@@ -31,6 +31,7 @@ use Nines\BagIt\Component\Component;
 use Nines\BagIt\Component\Declaration;
 use Nines\BagIt\Component\Fetch;
 use Nines\BagIt\Component\Manifest\PayloadManifest;
+use Nines\BagIt\Component\Manifest\TagManifest;
 use Nines\BagIt\Component\Metadata;
 use Nines\FileFind\Finder;
 use Nines\FileFind\FinderAdapter;
@@ -151,7 +152,9 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 		return $this->readComponent(Declaration::class, '/bagit.txt', 'Cannot find the required bag declaration file.');
 	}
 
-	abstract function getPayloadFiles();
+	public function getPayloadFiles() {
+		return array();
+	}
 
 	public function getPayloadManifests() {
 		$manifests = array();
@@ -191,5 +194,7 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 		return $this->readComponent(Fetch::class, '/fetch.txt');
 	}
 
-	abstract function getTagFiles();
+	public function getTagFiles() {
+		return array();
+	}
 }

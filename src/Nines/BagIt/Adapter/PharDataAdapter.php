@@ -45,11 +45,4 @@ class PharDataAdapter extends BagItAdapter {
 		parent::__construct(new PharData($base->getPathname()));
 	}
 
-	public function getPayloadFiles() {
-		
-	}
-
-	public function getTagFiles() {
-		
-	}
 }
