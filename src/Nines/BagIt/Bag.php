@@ -107,6 +107,13 @@ class Bag implements LoggerAwareInterface {
 	private $declaration;
 	
 	/**
+	 * Paths to the payload files
+	 *
+	 * @var string[]
+	 */
+	private $payloadFiles;
+	
+	/**
 	 * Payload manifest files
 	 *
 	 * @var PayloadManifest[]
@@ -137,6 +144,7 @@ class Bag implements LoggerAwareInterface {
 	public function __construct() {
 		$this->logger = new NullLogger();
 		$this->declaration = new Declaration();
+		$this->payloadFiles = array();
 		$this->payloadManifests = array();
 		$this->metadata = new Metadata();
 		$this->fetch = new Fetch();
@@ -250,7 +258,7 @@ class Bag implements LoggerAwareInterface {
 	 * @return SplFileInfo[] list of files
 	 */
 	public function listPayloadFiles($includeFetch = false) {
-		throw new RuntimeException(__METHOD__ . " not implemented.");
+		return array_values($this->payloadFiles);
 	}
 
 	/**
@@ -794,6 +802,7 @@ class Bag implements LoggerAwareInterface {
 		$this->adapter = BagItAdapter::open($path);
 		$this->adapter->setLogger($this->logger);
 		$this->declaration = $this->adapter->getDeclaration();
+		$this->payloadFiles = $this->adapter->getPayloadFiles();
 		$this->payloadManifests = $this->adapter->getPayloadManifests();
 		$this->metadata = $this->adapter->getMetadata();
 		$this->tagManifests = $this->adapter->getTagManifests();

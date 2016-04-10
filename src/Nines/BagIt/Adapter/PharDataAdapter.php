@@ -34,13 +34,6 @@ use SplFileInfo;
 
 class PharDataAdapter extends BagItAdapter {
 	
-	/**
-	 * Handle to the phar data archive.
-	 * 
-	 * @var PharData
-	 */
-	private $phar;
-	
 	public function __construct(SplFileInfo $base) {
 		parent::__construct(new PharData($base->getPathname()));
 	}

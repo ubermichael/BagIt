@@ -152,7 +152,14 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 		return $this->readComponent(Declaration::class, '/bagit.txt', 'Cannot find the required bag declaration file.');
 	}
 
-	abstract function getPayloadFiles();
+	public function getPayloadFiles() {
+		$fileInfos = $this->finder->find();
+		$payloadFiles = [];
+		foreach($fileInfos as $info) {
+			$payloadFiles[] = $info->getPathname();
+		}
+		return $payloadFiles;
+	}
 
 	public function getPayloadManifests() {
 		$manifests = array();
@@ -192,5 +199,9 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 		return $this->readComponent(Fetch::class, '/fetch.txt');
 	}
 
-	abstract function getTagFiles();
+	public function getTagFiles() {
+		return $this->finder->find(null, array(
+			'exclude' => array('data'),
+		));
+	}
 }

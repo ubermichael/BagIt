@@ -38,10 +38,6 @@ use SplFileInfo;
  */
 class DirectoryAdapter extends BagItAdapter {
 	
-	public function getPayloadFiles() {
-		
-	}
-	
 	public function getTagFiles() {
 		return $this->finder->find(null, array(
 			'exclude' => array('data'),
