@@ -2,6 +2,7 @@
 
 namespace Nines\BagIt;
 
+use Nines\BagIt\Component\Declaration;
 use PHPUnit_Framework_TestCase;
 use SplFileObject;
 
@@ -31,7 +32,7 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @expectedException \Nines\BagIt\BagException
+	 * @expectedException BagException
 	 */
 	public function testSetBadVersion() {
 		$this->decl->setVersion("5");
@@ -43,7 +44,7 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @expectedException \Nines\BagIt\BagException
+	 * @expectedException BagException
 	 */
 	public function testSetBadEncoding() {
 		$this->decl->setEncoding('LSKDJFLSDJF');

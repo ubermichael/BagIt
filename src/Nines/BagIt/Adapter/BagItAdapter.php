@@ -26,6 +26,7 @@
 
 namespace Nines\BagIt\Adapter;
 
+use DirectoryIterator;
 use Nines\BagIt\BagException;
 use Nines\BagIt\Component\Component;
 use Nines\BagIt\Component\Declaration;
@@ -35,16 +36,19 @@ use Nines\BagIt\Component\Manifest\TagManifest;
 use Nines\BagIt\Component\Metadata;
 use Nines\FileFind\Finder;
 use Nines\FileFind\FinderAdapter;
+use PharData;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use SplFileInfo;
 use SplFileObject;
 
 /**
  * Base class for adapters to read and write to the file system.
  */
-abstract class BagItAdapter implements LoggerAwareInterface {
+class BagItAdapter implements LoggerAwareInterface {
 
 	/**
 	 * @var SplFileInfo
@@ -63,7 +67,12 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 	protected $logger;
 
 	public function __construct(SplFileInfo $base) {
-		$this->base = $base;
+		if($base->isDir()) {
+			$this->base = $base;
+		} else {
+			$pd = new PharData($base->getRealPath());
+			$this->base = $pd->getFileInfo();
+		}
 		$this->finder = new Finder(FinderAdapter::getAdapter($base->getPathname()));
 		$this->logger = new NullLogger();
 	}
@@ -75,23 +84,6 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 	 */
 	public function setLogger(LoggerInterface $logger) {
 		$this->logger = $logger;
-	}
-
-	/**
-	 * Open a bag.
-	 * 
-	 * @param string $path the bag path
-	 * 
-	 * @return PharDataAdapter
-	 */
-	public static function open($path) {
-		$fileInfo = new SplFileInfo($path);
-		if ($fileInfo->isDir()) {
-			$adapter = new DirectoryAdapter($fileInfo);
-		} else {
-			$adapter = new PharDataAdapter($fileInfo);
-		}
-		return $adapter;
 	}
 
 	/**
@@ -153,40 +145,44 @@ abstract class BagItAdapter implements LoggerAwareInterface {
 	}
 
 	public function getPayloadFiles() {
-		$fileInfos = $this->finder->find();
-		$payloadFiles = [];
-		foreach($fileInfos as $info) {
-			$payloadFiles[] = $info->getPathname();
+		$payload = array();
+		$rdi = new RecursiveDirectoryIterator($this->base->getPathname() . '/data');
+		$rii = new RecursiveIteratorIterator($rdi);
+		foreach($rii as $filename => $current) {
+			if($current->isDir()) {
+				continue;
+			}
+			$payload[] = $current->getPathname();
 		}
-		return $payloadFiles;
+		return $payload;
 	}
 
 	public function getPayloadManifests() {
 		$manifests = array();
-		$callback = function(SplFileInfo $fi) {
-			return preg_match('/^manifest-[a-zA-Z0-9-]*.txt$/', $fi->getBasename());
-		};
-		$fileInfos = $this->finder->find($callback, array(
-			'depth' => 1,
-		));
-		foreach($fileInfos as $info) {
-			$manifest = $this->readComponent(PayloadManifest::class, $info->getBasename());
-			$manifests[$manifest->getAlgorithm()] = $manifest;
+		$di = new DirectoryIterator($this->base->getPathname());
+		foreach($di as $fileInfo) {
+			if($fileInfo->isDot()) {
+				continue;
+			}
+			if(preg_match('/^manifest-[a-zA-Z0-9-]*.txt$/', $fileInfo->getBasename())) {
+				$manifest = $this->readComponent(PayloadManifest::class, $fileInfo->getBasename());
+				$manifests[$manifest->getAlgorithm()] = $manifest;
+			}
 		}
 		return $manifests;
 	}
 
 	public function getTagManifests() {
 		$manifests = array();
-		$callback = function(SplFileInfo $fi) {
-			return preg_match('/^tagmanifest-[a-zA-Z0-9-]*.txt$/', $fi->getBasename());
-		};
-		$fileInfos = $this->finder->find($callback, array(
-			'depth' => 1,
-		));
-		foreach($fileInfos as $info) {
-			$manifest = $this->readComponent(TagManifest::class, $info->getBasename());
-			$manifests[$manifest->getAlgorithm()] = $manifest;
+		$di = new DirectoryIterator($this->base->getPathname());
+		foreach($di as $fileInfo) {
+			if($fileInfo->isDot()) {
+				continue;
+			}
+			if(preg_match('/^tagmanifest-[a-zA-Z0-9-]*.txt$/', $fileInfo->getBasename())) {
+				$manifest = $this->readComponent(TagManifest::class, $fileInfo->getBasename());
+				$manifests[$manifest->getAlgorithm()] = $manifest;
+			}
 		}
 		return $manifests;
 	}

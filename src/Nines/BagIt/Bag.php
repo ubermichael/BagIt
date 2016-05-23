@@ -141,6 +141,9 @@ class Bag implements LoggerAwareInterface {
 	 */
 	private $fetch;
 
+	/**
+	 * Construct a new, empty bag.
+	 */
 	public function __construct() {
 		$this->logger = new NullLogger();
 		$this->declaration = new Declaration();
@@ -366,6 +369,15 @@ class Bag implements LoggerAwareInterface {
 		return $this->payloadManifests[$algorithm]->listFiles();
 	}
 	
+	/**
+	 * Get the checksum for one paylod file.
+	 * 
+	 * Returns null if the bag doesn't have the given payload manifest.
+	 * 
+	 * @param string $algorithm
+	 * @param string $path
+	 * @return string|null
+	 */
 	public function getPayloadChecksum($algorithm, $path) {
 		if(! $this->hasPayloadManifest($algorithm)) {
 			return null;
@@ -452,6 +464,15 @@ class Bag implements LoggerAwareInterface {
 		return $this->tagManifests[$algorithm]->listFiles();
 	}
 	
+	/**
+	 * Get the checksum for a tag file from the tag manifests.
+	 * 
+	 * Returns null if the tag manifest for $algorithm doesn't exist.
+	 * 
+	 * @param string $algorithm
+	 * @param string $path
+	 * @return string|null
+	 */
 	public function getTagChecksum($algorithm, $path) {
 		if(! $this->hasTagManifest($algorithm)) {
 			return null;
@@ -799,7 +820,8 @@ class Bag implements LoggerAwareInterface {
 	 * @param string $path
 	 */
 	public function read($path) {
-		$this->adapter = BagItAdapter::open($path);
+		$fileInfo = new SplFileInfo($path);
+		$this->adapter = new BagItAdapter($fileInfo);
 		$this->adapter->setLogger($this->logger);
 		$this->declaration = $this->adapter->getDeclaration();
 		$this->payloadFiles = $this->adapter->getPayloadFiles();
