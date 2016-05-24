@@ -273,7 +273,7 @@ abstract class Manifest implements LoggerAwareInterface {
 	 */
 	public function read(SplFileObject $data, $encoding = 'UTF-8') {
 		$matches = array();
-		if( ! preg_match('/^(?:tag)?manifest-([a-zA-Z0-9-]+)\.txt$/', $data->getBasename(), $matches)) {
+		if(! preg_match('/^(?:tag)?manifest-([a-zA-Z0-9-]+)\.txt$/', $data->getBasename(), $matches)) {
 			throw new BagException("Cannot determine manifest algorithm from filename '{$data->getBasename()}'");
 		}
 		$this->setAlgorithm($matches[1]);

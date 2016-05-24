@@ -2,6 +2,7 @@
 
 namespace Nines\BagIt;
 
+use Nines\BagIt\Component\Metadata;
 use PHPUnit_Framework_TestCase;
 use SplFileObject;
 
@@ -56,13 +57,6 @@ class MetadataTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @expectedException  \Nines\BagIt\BagException
-	 */
-	public function testAddDataValueException() {
-		$this->metadata->addData('foo', array());
-	}
-	
-	/**
 	 * @expectedException \Nines\BagIt\BagException
 	 */
 	public function testAddDataEmptyKey() {
@@ -81,13 +75,6 @@ class MetadataTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSetDataKeyException() {
 		$this->metadata->setData(array(), '');
-	}
-	
-	/**
-	 * @expectedException  \Nines\BagIt\BagException
-	 */
-	public function testSetDataValueException() {
-		$this->metadata->setData('foo', array());
 	}
 	
 	/**

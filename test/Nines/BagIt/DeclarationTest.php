@@ -4,7 +4,6 @@ namespace Nines\BagIt;
 
 use Nines\BagIt\Component\Declaration;
 use PHPUnit_Framework_TestCase;
-use SplFileObject;
 
 class DeclarationTest extends PHPUnit_Framework_TestCase {
 	
@@ -15,15 +14,15 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testGetFilename() {
-		$this->assertEquals('bagit.txt', $this->decl->getPath());
+		$this->assertEquals('bagit.txt', $this->decl->getFilename());
 	}
 	
 	public function testDefaultVersion() {
-		$this->assertEquals(Bag::DEFAULT_BAGIT_VERSION, $this->decl->getVersion());
+		$this->assertEquals(Bag::DEFAULT_VERSION, $this->decl->getVersion());
 	}
 	
 	public function testDefaultEncoding() {
-		$this->assertEquals(Bag::DEFAULT_BAGIT_ENCODING, $this->decl->getEncoding());
+		$this->assertEquals(Bag::DEFAULT_ENCODING, $this->decl->getEncoding());
 	}
 	
 	public function testSetVersion() {
@@ -32,7 +31,7 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @expectedException BagException
+	 * @expectedException Nines\BagIt\BagException
 	 */
 	public function testSetBadVersion() {
 		$this->decl->setVersion("5");
@@ -44,7 +43,7 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @expectedException BagException
+	 * @expectedException Nines\BagIt\BagException
 	 */
 	public function testSetBadEncoding() {
 		$this->decl->setEncoding('LSKDJFLSDJF');
