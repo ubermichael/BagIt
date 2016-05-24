@@ -56,12 +56,6 @@ class BagItAdapter implements LoggerAwareInterface {
 	protected $base;
 
 	/**
-	 *
-	 * @var Finder
-	 */
-	protected $finder;
-
-	/**
 	 * @var LoggerInterface 
 	 */
 	protected $logger;
@@ -73,7 +67,6 @@ class BagItAdapter implements LoggerAwareInterface {
 			$pd = new PharData($base->getRealPath());
 			$this->base = $pd->getFileInfo();
 		}
-		$this->finder = new Finder(FinderAdapter::getAdapter($base->getPathname()));
 		$this->logger = new NullLogger();
 	}
 
@@ -141,7 +134,7 @@ class BagItAdapter implements LoggerAwareInterface {
 	 * @throws BagException if the declaration does not exist.
 	 */
 	public function getDeclaration() {
-		return $this->readComponent(Declaration::class, '/bagit.txt', 'Cannot find the required bag declaration file.');
+		return $this->readComponent('Nines\BagIt\Component\Declaration', '/bagit.txt', 'Cannot find the required bag declaration file.');
 	}
 
 	public function getPayloadFiles() {
@@ -165,7 +158,7 @@ class BagItAdapter implements LoggerAwareInterface {
 				continue;
 			}
 			if(preg_match('/^manifest-[a-zA-Z0-9-]*.txt$/', $fileInfo->getBasename())) {
-				$manifest = $this->readComponent(PayloadManifest::class, $fileInfo->getBasename());
+				$manifest = $this->readComponent('Nines\BagIt\Component\Manifest\PayloadManifest', $fileInfo->getBasename());
 				$manifests[$manifest->getAlgorithm()] = $manifest;
 			}
 		}
@@ -180,7 +173,7 @@ class BagItAdapter implements LoggerAwareInterface {
 				continue;
 			}
 			if(preg_match('/^tagmanifest-[a-zA-Z0-9-]*.txt$/', $fileInfo->getBasename())) {
-				$manifest = $this->readComponent(TagManifest::class, $fileInfo->getBasename());
+				$manifest = $this->readComponent('Nines\BagIt\Component\Manifest\TagManifest', $fileInfo->getBasename());
 				$manifests[$manifest->getAlgorithm()] = $manifest;
 			}
 		}
@@ -188,11 +181,11 @@ class BagItAdapter implements LoggerAwareInterface {
 	}
 
 	public function getMetadata() {
-		return $this->readComponent(Metadata::class, '/bag-info.txt');
+		return $this->readComponent('Nines\BagIt\Component\Metadata', '/bag-info.txt');
 	}
 
 	public function getFetch() {
-		return $this->readComponent(Fetch::class, '/fetch.txt');
+		return $this->readComponent('Nines\BagIt\Component\Fetch', '/fetch.txt');
 	}
 
 	public function getTagFiles() {

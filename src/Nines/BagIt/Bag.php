@@ -212,6 +212,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Add a payload file from $source.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -225,6 +227,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Replace a payload file from $source.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -238,6 +242,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Check if a payload file exists.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -266,6 +272,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Count the payload files.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param boolean $includeFetch if true then include files listed in the
 	 * fetch file. This doesn't actually check if the files can be downloaded.
@@ -278,6 +286,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Remove a payload file. 
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -292,6 +302,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Get a payload file, optionally downloading it from url listed in the 
 	 * fetch file.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @return SplFileInfo describing the file.
 	 */
@@ -304,6 +316,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Add a payload manifest with the given algorithm. If $path is not null, 
 	 * attempt to read the data from the manifest file.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @see http://php.net/manual/en/function.hash-algos.php
 	 * 
@@ -319,6 +333,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Remove a payload manifest.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $algorithm The manifest to remove.
 	 */
@@ -389,6 +405,8 @@ class Bag implements LoggerAwareInterface {
 	 * Update the payload manifest checksums from the contents of the data/
 	 * directory. If the fetch files should be included in the manifests, they
 	 * must be downloaded first.
+     * 
+     * @todo unimplemented
 	 */
 	public function updatePayloadManifests() {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -399,6 +417,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Add a tag manifest with the given algorithm. If $path is not null, 
 	 * attempt to read the data from the manifest file.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @see http://php.net/manual/en/function.hash-algos.php
 	 * 
@@ -414,6 +434,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Remove a tag manifest.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $algorithm The manifest to remove.
 	 */
@@ -484,6 +506,8 @@ class Bag implements LoggerAwareInterface {
 	 * Update the tag manifest checksums from the contents of the data/
 	 * directory. If the fetch files should be included in the manifests, they
 	 * must be downloaded first.
+     * 
+     * @todo unimplemented
 	 */
 	public function updateTagManifests() {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -585,6 +609,8 @@ class Bag implements LoggerAwareInterface {
 	// Tag files
 	/**
 	 * Add a tag file from $source.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the tag file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -598,7 +624,9 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Replace a tag file from $source.
-	 * 
+     * 
+     * @todo unimplemented
+     * 
 	 * @param string $path path to the tag file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
 	 * 
@@ -611,6 +639,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Check if a tag file exists.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the tag file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -623,6 +653,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Get an array of tag files.
+     * 
+     * @todo unimplemented
 	 * 
 	 * return SplFileInfo[]
 	 */
@@ -632,6 +664,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Remove a tag file. 
+     * 
+     * @todo unimplemented
 	 */
 	public function removeTagFile($path) {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -639,6 +673,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Get a tag file.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @return SplFileInfo
 	 */
@@ -663,6 +699,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Remove the fetch file from the bag, perhaps after downloading the 
 	 * remote content.
+     * 
+     * @todo unimplemented
 	 */
 	public function removeFetchFile() {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -679,6 +717,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Count the remote files. Files listed more than once are only counted
 	 * once.
+     * 
+     * @todo unimplemented
 	 * 
 	 * Really a wrapper for `count($bag->listFetchFiles())`
 	 */
@@ -708,6 +748,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Add an entry to the fetch file. Length is optional. This only adds the
 	 * entry, it does not upload the file anywhere.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path the path to the file. Should include the 'data/' 
 	 * prefix, but it will be added if necessary.
@@ -722,6 +764,8 @@ class Bag implements LoggerAwareInterface {
 
 	/**
 	 * Check if there is a fetch entry for a path.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -737,6 +781,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Count the fetch entries. If $path is null, count all fetch entries
 	 * otherwise only count the entries for $path.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary.
@@ -752,6 +798,8 @@ class Bag implements LoggerAwareInterface {
 	 * contain multiple URLs, only the first successful download will be kept. 
 	 * If $checkManifest is true and the checksum for the file doesn't match
 	 * one of the payload manifests, it will be considered a failed download.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path path to the payload file inside the bag. Should
 	 * include the 'data/' prefix, but it will be added if necessary. If null, 
@@ -767,6 +815,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Remove the files listed in the fetch list from the bag, perhaps after 
 	 * updating or validating checksums. This method does not update manifests.
+     * 
+     * @todo unimplemented
 	 */
 	public function removeFetchFiles() {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -776,6 +826,8 @@ class Bag implements LoggerAwareInterface {
 	// Other actions
 	/**
 	 * Check if the bag is complete.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @return boolean true if the bag is complete.
 	 */
@@ -786,6 +838,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Check if the bag is valid. A bag is valid if it is complete and all 
 	 * manifest checksums match.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @return boolean true if the bag is valid.
 	 */
@@ -796,6 +850,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Update all the tag and payload manifests to match the contents. This 
 	 * method does not alter the contents on disk.
+     * 
+     * @todo unimplemented
 	 */
 	public function update() {
 		throw new RuntimeException(__METHOD__ . " not implemented.");
@@ -806,6 +862,8 @@ class Bag implements LoggerAwareInterface {
 	/**
 	 * Write/serialize the bag to disk. This method will change contents 
 	 * on disk.
+     * 
+     * @todo unimplemented
 	 * 
 	 * @param string $path
 	 */
