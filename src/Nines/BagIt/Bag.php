@@ -832,6 +832,11 @@ class Bag implements LoggerAwareInterface {
 	 * @return boolean true if the bag is complete.
 	 */
 	public function isComplete() {
+        $complete = true;
+        if(! $this->declaration) {
+            $complete = false;
+            $this->logger->warning("Bag is missing the declaration.");
+        }
 		throw new RuntimeException(__METHOD__ . " not implemented.");
 	}
 

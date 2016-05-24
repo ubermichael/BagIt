@@ -54,5 +54,48 @@ class DeclarationTest extends PHPUnit_Framework_TestCase {
 		$this->decl->setVersion("1.23");
 		$this->assertEquals("BagIt-Version: 1.23\nTag-File-Character-Encoding: UTF-16\n", $this->decl->serialize());
 	}
+    
+    public function testRead() {
+        $fi = new \SplFileObject('php://temp', 'r+');
+        $fi->fwrite("BagIt-Version: 1.1234\n");
+        $fi->fwrite("Tag-File-Character-Encoding: UTF-16\n");
+        $fi->rewind();
+        $this->decl->read($fi);
+        $this->assertEquals('1.1234', $this->decl->getVersion());
+        $this->assertEquals('UTF-16', $this->decl->getEncoding());
+    }
 	
+	/**
+	 * @expectedException Nines\BagIt\BagException
+	 */
+    public function testReadBadVersion() {
+        $fi = new \SplFileObject('php://temp', 'r+');
+        $fi->fwrite("BagIt-Version: Cheeses\n");
+        $fi->fwrite("Tag-File-Character-Encoding: UTF-16\n");
+        $fi->rewind();
+        $this->decl->read($fi);
+    }
+    
+	/**
+	 * @expectedException Nines\BagIt\BagException
+	 */
+    public function testReadBadEncoding() {
+        $fi = new \SplFileObject('php://temp', 'r+');
+        $fi->fwrite("BagIt-Version: Cheeses\n");
+        $fi->fwrite("Tag-File-Character-Encoding: Oranges\n");
+        $fi->rewind();
+        $this->decl->read($fi);
+    }
+    
+	/**
+	 * @expectedException Nines\BagIt\BagException
+	 */
+    public function testReadExtraJunk() {
+        $fi = new \SplFileObject('php://temp', 'r+');
+        $fi->fwrite("BagIt-Version: 0.01\n");
+        $fi->fwrite("Tag-File-Character-Encoding: ISO-Latin-1\n");
+        $fi->fwrite("Stuff is awesome\n");
+        $fi->rewind();
+        $this->decl->read($fi);
+    }
 }

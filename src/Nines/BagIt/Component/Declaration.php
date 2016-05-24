@@ -131,6 +131,9 @@ class Declaration extends Component {
 			throw new BagException("Malformed tag encoding in {$encodingLine}");
 		}
 		$this->encoding = $encodingMatches[1];
+        if(! $data->eof()) {
+			throw new BagException("Extra junk in declaration.");
+        }
 	}
 
 	/**
