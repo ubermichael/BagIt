@@ -37,27 +37,8 @@ use SplFileObject;
  */
 abstract class Component implements LoggerAwareInterface {
 	
-	/**
-	 * @var LoggerInterface 
-	 */
-	protected $logger;
-	
-	/**
-	 * Build a new, empty declaration
-	 */
-	public function __construct() {
-		$this->logger = new NullLogger();
-	}
-	
-	/**
-	 * Set the logger for the declaration.
-	 * 
-	 * @param LoggerInterface $logger the PSR3-compatible logger.
-	 */
-	public function setLogger(LoggerInterface $logger) {
-		$this->logger = $logger;
-	}
-	
+    use \Psr\Log\LoggerAwareTrait;
+    
 	/**
 	 * Get the file name for a component.
 	 * 

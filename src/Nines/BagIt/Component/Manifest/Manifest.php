@@ -38,6 +38,8 @@ use SplFileObject;
  */
 abstract class Manifest implements LoggerAwareInterface {
 	
+    use \Psr\Log\LoggerAwareTrait;
+    
 	/**
 	 * The hash algorithm for this manifest file.
 	 * @var string
@@ -49,11 +51,6 @@ abstract class Manifest implements LoggerAwareInterface {
 	 * @var array
 	 */
 	protected $hashes;
-	
-	/**
-	 * @var LoggerInterface 
-	 */
-	protected $logger;
 	
 	/**
 	 * Return the filename for the manifest. Something like manifest-sha1.txt
@@ -69,18 +66,8 @@ abstract class Manifest implements LoggerAwareInterface {
 	public function __construct() {
 		$this->hashes = array();
 		$this->algorithm = null;
-		$this->logger = new NullLogger();
 	}
 
-	/**
-	 * Set the logger for the manifest.
-	 * 
-	 * @param LoggerInterface $logger
-	 */
-	public function setLogger(LoggerInterface $logger) {
-		$this->logger = $logger;
-	}
-	
 	/**
 	 * Get the algorithm this manifest uses.
 	 * 

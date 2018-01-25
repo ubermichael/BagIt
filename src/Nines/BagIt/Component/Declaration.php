@@ -47,7 +47,6 @@ class Declaration extends Component {
 	 * Build a new, empty declaration
 	 */
 	public function __construct() {
-		parent::__construct();
 		$this->version = Bag::DEFAULT_VERSION;
 		$this->encoding = Bag::DEFAULT_ENCODING;
 	}

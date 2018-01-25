@@ -2,3 +2,6 @@ vendor
 *.log
 docs/api
 data
+/nbproject/private/nbproject
+run.php
+nbproject

@@ -46,7 +46,6 @@ class Fetch extends Component {
 	 * Build an empty Fetch list.
 	 */
 	public function __construct() {
-		parent::__construct();
 		$this->data = array();
 	}
 

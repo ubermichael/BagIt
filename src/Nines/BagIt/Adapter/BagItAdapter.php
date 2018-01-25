@@ -50,15 +50,12 @@ use SplFileObject;
  */
 class BagItAdapter implements LoggerAwareInterface {
 
+    use \Psr\Log\LoggerAwareTrait;
+    
 	/**
 	 * @var SplFileInfo
 	 */
 	protected $base;
-
-	/**
-	 * @var LoggerInterface 
-	 */
-	protected $logger;
 
 	public function __construct(SplFileInfo $base) {
 		if($base->isDir()) {
@@ -68,15 +65,6 @@ class BagItAdapter implements LoggerAwareInterface {
 			$this->base = $pd->getFileInfo();
 		}
 		$this->logger = new NullLogger();
-	}
-
-	/**
-	 * Set the logger for the declaration.
-	 * 
-	 * @param LoggerInterface $logger
-	 */
-	public function setLogger(LoggerInterface $logger) {
-		$this->logger = $logger;
 	}
 
 	/**

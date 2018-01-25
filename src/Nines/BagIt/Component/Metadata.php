@@ -49,7 +49,6 @@ class Metadata extends Component {
 	 * Construct a new empty metadata object.
 	 */
 	public function __construct() {
-		parent::__construct();
 		$this->data = array();
 	}
 

@@ -9,7 +9,31 @@ But for now it is incomplete. Fork and clone this repository.
 
 ## Development
 
+For the repository to your own Github account, then clone it to your development
+environment.
 
+```sh
+$ git clone git://github.com/<username>/bagit.git
+```
+
+Install the dependencies with Composer.
+
+```sh
+$ composer install --dev
+```
+
+Hack away at the code and do fun things with it. Add tests in the test 
+directory. Add documentation. Make some commits, send a pull request.
+
+```sh
+# documentation:
+$ ./vendor/bin/sami.php update sami.php
+# unit tests:
+$ ./vendor/bin/phpunit
+# code style:
+$ ./vendor/bin/phpcs
+$ ./vendor/bin/phpcbf
+```
 
 ## Usage
 
@@ -82,3 +106,11 @@ foreach($bag->listPayloadFiles() as $path) {
 	print "  {$path}\n";
 }
 ```
+
+## Contributors
+
+Michael Joyce <ubermichael@gmail.com>
+
+## License
+
+GPL 2.

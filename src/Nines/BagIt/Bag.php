@@ -77,6 +77,8 @@ use SplFileInfo;
  */
 class Bag implements LoggerAwareInterface {
 
+    use \Psr\Log\LoggerAwareTrait;
+    
 	/**
 	 * Default version of the BagIt spec.
 	 */
@@ -86,11 +88,6 @@ class Bag implements LoggerAwareInterface {
 	 * Default tag file encoding.
 	 */
 	const DEFAULT_ENCODING = 'UTF-8';
-
-	/**
-	 * @var LoggerInterface
-	 */
-	protected $logger;
 
 	/**
 	 * Adapter to read from and write to the file system.
@@ -152,15 +149,6 @@ class Bag implements LoggerAwareInterface {
 		$this->metadata = new Metadata();
 		$this->fetch = new Fetch();
 		$this->tagManifests = array();
-	}
-
-	/**
-	 * Set a logger for bag operations. 
-	 * 
-	 * @param LoggerInterface $logger The logger to use
-	 */
-	public function setLogger(LoggerInterface $logger) {
-		$this->logger = $logger;
 	}
 
 	//  ------------------------------------- 
