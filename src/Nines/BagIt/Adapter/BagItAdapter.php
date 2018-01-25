@@ -127,13 +127,14 @@ class BagItAdapter implements LoggerAwareInterface {
 
 	public function getPayloadFiles() {
 		$payload = array();
-		$rdi = new RecursiveDirectoryIterator($this->base->getPathname() . '/data');
+        $basePath = $this->base->getPathname() . '/data';
+		$rdi = new RecursiveDirectoryIterator($basePath);
 		$rii = new RecursiveIteratorIterator($rdi);
 		foreach($rii as $filename => $current) {
 			if($current->isDir()) {
 				continue;
 			}
-			$payload[] = $current->getPathname();
+			$payload[] = substr($current->getPathname(), 1+strlen($this->base->getPathname()));
 		}
 		return $payload;
 	}
