@@ -8,7 +8,7 @@
 
 namespace Nines\BagIt\Console;
 
-use Nines\BagIt\Console\Command\ListCommand;
+use Nines\BagIt\Console\Command\CatalogCommand;
 use Nines\BagIt\Console\Command\VerifyCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 
@@ -21,7 +21,7 @@ class Application extends BaseApplication {
         error_reporting(-1);        
         parent::__construct('BagIt');
         $this->add(new VerifyCommand());
-        $this->add(new ListCommand());
+        $this->add(new CatalogCommand());
     }
 
     

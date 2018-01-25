@@ -17,11 +17,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Description of VerifyCommand
  */
-class ListCommand extends BaseCommand {
+class CatalogCommand extends BaseCommand {
     
     protected function configure() {
         parent::configure();
-        $this->setName('list');
+        $this->setName('catalog');
         $this->setDescription('List the contents of one or more bags');
         $this->addArgument('files', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'List of bags to verify.');
     }

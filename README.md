@@ -35,7 +35,25 @@ $ ./vendor/bin/phpcs
 $ ./vendor/bin/phpcbf
 ```
 
-## Usage
+## Command Line Usage
+
+`bagit.php` is a thin wrapper around the command line components from Symfony.
+
+```bash
+ $ php bagit.php help
+ $ php bagit.php list
+```
+
+Or as a .phar file. Build it using [Box](https://github.com/box-project/box2).
+
+```bash
+ $ box build
+ $ ./bagit.phar help
+ $ mv bagit.phar /usr/local/bin/bagit
+ $ bagit list
+```
+
+## Library Usage
 
 Read a BagIt file:
 
