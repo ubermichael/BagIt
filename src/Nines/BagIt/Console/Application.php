@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace Nines\Bagit\Console;
+namespace Nines\BagIt\Console;
 
-use Nines\Bagit\Console\Command\ListCommand;
-use Nines\Bagit\Console\Command\VerifyCommand;
+use Nines\BagIt\Console\Command\ListCommand;
+use Nines\BagIt\Console\Command\VerifyCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 
 /**

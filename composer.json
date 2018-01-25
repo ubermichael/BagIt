@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nines\\": "src/Nines/"
+            "Nines\\": ["src/Nines/"]
         }
     }    
 }

@@ -1,7 +1,6 @@
-vendor
+/vendor
 *.log
-docs/api
-data
-/nbproject/private/nbproject
-run.php
-nbproject
+/docs/api
+/data
+/run.php
+/nbproject

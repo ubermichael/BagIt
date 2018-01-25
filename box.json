@@ -1,0 +1,24 @@
+{
+    "output": "bagit.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "extract": false,
+    "main": "bagit.php",
+    "files": [
+        "LICENSE",
+        "bagit.php"
+    ],
+    "finder": [{
+            "name": "*.php",
+            "exclude": ["Tests", "tests", "Test", "test"],
+            "in": "vendor"
+        }, {
+            "name": "*.php",
+            "in": "src"
+        }
+    ],
+    "stub": true,
+    "web": false
+}

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Nines\Bagit\Console\Command;
+namespace Nines\BagIt\Console\Command;
 
 use Nines\BagIt\Bag;
 use Symfony\Component\Console\Command\Command as BaseCommand;
