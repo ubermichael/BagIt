@@ -1,6 +1,7 @@
 # BagIt
 
-Simple, modern, implementation of the BagIt spec. So far it only reads Bag files.
+Simple, modern, implementation of the [BagIt spec](https://github.com/jkunze/bagitspec). So 
+far it only reads Bag files.
 
 ## Installation
 
